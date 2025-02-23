@@ -83,7 +83,7 @@ export default function DisperseUI() {
       
       <label className="block font-semibold mb-2">Or Enter Data Manually:</label>
       <Textarea 
-        placeholder="Enter wallet addresses separated by space or comma, followed by the amount. Example:\n0x123...abc 10\n0x456...def 20"
+        placeholder="Enter wallet addresses separated by space or comma for the amount. Example:\n0x123...abc,10\n0x456...def 20"
         value={manualData} 
         onChange={handleManualInput} 
         className="mb-4 h-96 resize-none border-gray-300 border rounded-lg p-2 w-full text-sm"
