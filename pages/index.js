@@ -12,7 +12,6 @@ const ABI = [
   "function disperse(address[] recipients, uint256[] amounts) external payable"
 ];
 
-toast.configure();
 
 export default function DisperseUI() {
   const [file, setFile] = useState(null);
