@@ -70,8 +70,8 @@ export default function DisperseUI() {
   };
 
   return (
-    <div className="p-6 max-w-2xl mx-auto bg-white shadow-lg rounded-lg">
-      <h1 className="text-2xl font-bold mb-4 text-center">Monad Token Disperser</h1>
+    <div className="p-6 max-w-3xl mx-auto bg-white shadow-lg rounded-lg">
+      <h1 className="text-3xl font-bold mb-4 text-center">Monad Token Disperser</h1>
       <p className="text-gray-600 text-center mb-6">Easily distribute MON tokens to multiple recipients.</p>
       
       <label className="block font-semibold mb-2">Upload CSV File:</label>
@@ -82,7 +82,7 @@ export default function DisperseUI() {
         placeholder="Enter address and amount manually, separated by space or comma (one per line). Example:\n0x123...abc 10\n0x456...def 20"
         value={manualData} 
         onChange={handleManualInput} 
-        className="mb-4 h-52 resize-none border-gray-300 border rounded-lg p-2 w-full"
+        className="mb-4 h-64 resize-none border-gray-300 border rounded-lg p-2 w-full"
       />
       
       {data.length > 0 && (
@@ -96,7 +96,7 @@ export default function DisperseUI() {
         </div>
       )}
       
-      <Button onClick={handleSend} disabled={loading || data.length === 0} className="w-full py-2 text-lg">
+      <Button onClick={handleSend} disabled={loading || data.length === 0} className="w-full py-3 text-lg font-semibold">
         {loading ? "Sending..." : "Send Tokens"}
       </Button>
     </div>
