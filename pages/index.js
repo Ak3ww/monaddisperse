@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ethers } from "ethers";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Textarea } from "../components/ui/textarea";
 
 const CONTRACT_ADDRESS = "0xf662457b7902f302aed42825878c76f8e82a2bbe";
 const ABI = [
