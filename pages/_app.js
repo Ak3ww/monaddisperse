@@ -1,4 +1,5 @@
 import { useState } from "react";
+import '../styles/globals.css';
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import { Button } from "../components/ui/button";
