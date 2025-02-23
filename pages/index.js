@@ -34,7 +34,7 @@ export default function DisperseUI() {
   const parseData = (input) => {
     const lines = input.split("\n").map(line => line.trim()).filter(line => line);
     return lines.map(line => {
-      const parts = line.split(/[ ,]+/);
+      const parts = line.split(/[ ,=]+/);
       return { address: parts[0], amount: parseEther(parts[1]) };
     });
   };
@@ -91,14 +91,21 @@ export default function DisperseUI() {
         <p className="mb-4 text-sm">Connected: {walletAddress}</p>
       )}
 
-      <Input type="file" onChange={handleFileUpload} className="mb-4" />
-      <Textarea
-        placeholder="Enter address and amount manually, separated by space or comma (one per line)"
-        value={manualData}
-        onChange={handleManualInput}
-        className="mb-4"
-        style={{ height: '500px', minHeight: '400px', width: '100%' }}  // Increased height!
-      />
+      {/*Conditionally rendering textarea for address and amount*/}
+      {walletAddress && (
+        <div>
+          <p>Recipients and amounts</p>
+          <p>Enter one address and amount in ETH on each line. Supports any format.</p>
+          <Input type="file" onChange={handleFileUpload} className="mb-4" />
+          <Textarea
+            placeholder={`Examples:\n0x1234567890abcdef1234567890abcdef12345678, 1.23\n0x9876543210fedcba9876543210fedcba98765432 4.56\n0xfedcba9876543210fedcba9876543210fedcba98 7.89`}
+            value={manualData}
+            onChange={handleManualInput}
+            className="mb-4"
+            style={{ height: '300px', minHeight: '200px', width: '100%' }} // Reduced height
+          />
+        </div>
+      )}
 
       {data.length > 0 && (
         <div className="p-4 bg-gray-100 rounded-md mb-4">
