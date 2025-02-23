@@ -15,11 +15,6 @@ const Logo = () => (
     </svg>
 );
 
-const CONTRACT_ADDRESS = "0xf662457b7902f302aed42825878c76f8e82a2bbe";
-const ABI = [
-    "function disperse(address[] recipients, uint256[] amounts) external payable"
-];
-
 const styles = {
     container: {
         padding: "30px",
