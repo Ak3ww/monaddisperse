@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { BrowserProvider, Contract, parseEther } from 'ethers'; // Corrected import
-import { useAccount, useConnect, useDisconnect, InjectedConnector } from 'wagmi';
+import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import { InjectedConnector } from '@wagmi/core'; // Correct import
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
