@@ -62,7 +62,7 @@ const styles = {
     },
   },
   disconnectButton: {
-    backgroundColor: "#e74c3c",
+    backgroundColor: "#e74c3c", // Darker Red
     color: "white",
     padding: "10px 16px",
     border: "none",
@@ -111,7 +111,7 @@ const styles = {
     fontSize: "14px",
   },
   sendButton: {
-    backgroundColor: "#3498db",
+    backgroundColor: "#3498db", // Slightly Different Blue
     color: "white",
     padding: "12px 18px",
     border: "none",
@@ -273,7 +273,7 @@ export default function DisperseUI() {
       </button>
     
        <footer style={styles.footer}>
-          Created with love <3 by rolf
+          Created with love ❤️ by rolf
           <a href="https://twitter.com/0xRolf" target="_blank" rel="noopener noreferrer">
             <TwitterLogo style={styles.twitterLogo} />
           </a>
