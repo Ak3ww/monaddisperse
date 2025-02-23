@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { BrowserProvider, Contract, parseEther, formatEther } from "ethers";
 import { Button } from "../components/ui/button";
 import { Textarea } from "../components/ui/textarea";
+import { toast } from 'react-toastify'; // Import toast
+import 'react-toastify/dist/ReactToastify.css';
 
 // Logo SVG (already defined in the previous response)
 const Logo = () => (
@@ -199,11 +201,22 @@ export default function DisperseUI() {
             const totalAmount = amounts.reduce((acc, amount) => acc + amount, 0n);
 
             const tx = await contract.disperse(addresses, amounts, { value: totalAmount });
-            await tx.wait();
-            alert("Transaction successful!");
+            const txReceipt = await tx.wait();  // Wait for the transaction and get the receipt
+
+            const explorerUrl = `https://testnet.monadexplorer.com/tx/${txReceipt.hash}?tab=Internal+Txns`;
+
+            toast.success(
+                <div>
+                    Transaction successful! View on Monad Explorer:
+                    <a href={explorerUrl} target="_blank" rel="noopener noreferrer">
+                         View on Explorer
+                    </a>
+                </div>
+            );
+
         } catch (error) {
             console.error(error);
-            alert("Transaction failed.");
+            toast.error("Transaction failed.");
         }
         setLoading(false);
     };
@@ -237,7 +250,7 @@ export default function DisperseUI() {
                     </p>
 
                     <Textarea
-                        placeholder={`0xf39Fd6e51f71033a1b5584204Cc305234DDb44, 1.23\n0x70997970C51812dc3A010C7d01b50e0d17dc79C8 4.56\n0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC=7.89`}
+                        placeholder={`0xf39Fd6e51f71033a1b5584204Cc305234DDb44 1.23\n0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 4.56\n0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC=7.89`}
                         value={manualData}
                         onChange={handleManualInput}
                         style={styles.textarea}
@@ -245,36 +258,36 @@ export default function DisperseUI() {
                 </div>
             )}
 
-             {data.length > 0 && (
-        <div style={styles.parsedAddresses}>
-          <h2 style={styles.parsedAddressesTitle}>Parsed Addresses</h2>
-          <ul style={styles.parsedAddressList}>
-            {data.map((d, i) => (
-              <li key={i} style={styles.parsedAddressItem}>
-                {d.address} - {formatEther(d.amount)} MON
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+            {data.length > 0 && (
+                <div style={styles.parsedAddresses}>
+                    <h2 style={styles.parsedAddressesTitle}>Parsed Addresses</h2>
+                    <ul style={styles.parsedAddressList}>
+                        {data.map((d, i) => (
+                            <li key={i} style={styles.parsedAddressItem}>
+                                {d.address} - {formatEther(d.amount)} MON
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
 
-      {/* ✅ Send Tokens Button - Only Show When Wallet is Connected */}
-      {walletAddress && (
-        <button
-          style={styles.sendButton}
-          onClick={handleSend}
-          disabled={loading || data.length === 0}
-        >
-          {loading ? "Sending..." : "Send Tokens"}
-        </button>
-      )}
-    
-       <footer style={styles.footer}>
-          Created with love ❤️ by rolf
-          <a href="https://twitter.com/0xRolf" target="_blank" rel="noopener noreferrer">
-            <TwitterLogo style={styles.twitterLogo} />
-          </a>
-        </footer>
-    </div>
-  );
+            {/* ✅ Send Tokens Button - Only Show When Wallet is Connected */}
+            {walletAddress && (
+                <button
+                    style={styles.sendButton}
+                    onClick={handleSend}
+                    disabled={loading || data.length === 0}
+                >
+                    {loading ? "Sending..." : "Send Tokens"}
+                </button>
+            )}
+
+            <footer style={styles.footer}>
+                Created with love ❤️ by rolf
+                <a href="https://twitter.com/0xRolf" target="_blank" rel="noopener noreferrer">
+                    <TwitterLogo style={styles.twitterLogo} />
+                </a>
+            </footer>
+        </div>
+    );
 }
