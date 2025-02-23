@@ -1,30 +1,24 @@
 import { useState } from "react";
+import { ethers } from "ethers";
 import { BrowserProvider, Contract, parseEther, formatEther } from "ethers";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Textarea } from "../components/ui/textarea";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CONTRACT_ADDRESS = "0xf662457b7902f302aed42825878c76f8e82a2bbe";
 const ABI = [
   "function disperse(address[] recipients, uint256[] amounts) external payable"
 ];
 
-export default function DisperseApp() {
-  const [walletAddress, setWalletAddress] = useState(null);
+toast.configure();
+
+export default function DisperseUI() {
+  const [file, setFile] = useState(null);
   const [manualData, setManualData] = useState("");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  const connectWallet = async () => {
-    if (!window.ethereum) {
-      alert("MetaMask is required.");
-      return;
-    }
-    try {
-      const provider = new BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      setWalletAddress(await signer.getAddress());
-    } catch (error) {
-      console.error("Wallet connection failed:", error);
-    }
-  };
 
   const parseData = (input) => {
     const lines = input.split("\n").map(line => line.trim()).filter(line => line);
@@ -34,13 +28,25 @@ export default function DisperseApp() {
     });
   };
 
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    setFile(file);
+    
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setData(parseData(e.target.result));
+    };
+    reader.readAsText(file);
+  };
+
   const handleManualInput = (event) => {
     setManualData(event.target.value);
     setData(parseData(event.target.value));
   };
 
   const handleSend = async () => {
-    if (!walletAddress || data.length === 0) return;
+    if (!window.ethereum || data.length === 0) return;
     setLoading(true);
     try {
       const provider = new BrowserProvider(window.ethereum);
@@ -53,55 +59,46 @@ export default function DisperseApp() {
 
       const tx = await contract.disperse(addresses, amounts, { value: totalAmount });
       await tx.wait();
-      alert("Transaction successful!");
+      
+      const explorerUrl = `https://testnet.monadexplorer.com/tx/${tx.hash}?tab=Internal+Txns`;
+      toast.success(<a href={explorerUrl} target="_blank" rel="noopener noreferrer">Transaction successful! View on Explorer</a>, { autoClose: 8000 });
     } catch (error) {
       console.error(error);
-      alert("Transaction failed.");
+      toast.error("Transaction failed.");
     }
     setLoading(false);
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-center p-6">
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-2xl w-full">
-        <h1 className="text-2xl font-semibold text-center mb-6">Monad Token Disperser</h1>
-        {!walletAddress ? (
-          <button onClick={connectWallet} className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
-            Connect Wallet
-          </button>
-        ) : (
-          <p className="text-sm text-gray-600 mb-4 text-center">Connected: {walletAddress}</p>
-        )}
-
-        <textarea
-          placeholder="Enter addresses & amounts (one per line)"
-          value={manualData}
-          onChange={handleManualInput}
-          className="w-full p-3 border rounded-md focus:ring focus:ring-blue-300 mt-4"
-        />
-
-        {data.length > 0 && (
-          <div className="mt-4 p-3 bg-gray-50 border rounded-md">
-            <h2 className="text-sm font-semibold mb-2">Recipients</h2>
-            <ul className="text-sm text-gray-700 space-y-1">
-              {data.map((d, i) => (
-                <li key={i} className="flex justify-between">
-                  <span>{d.address}</span>
-                  <span>{formatEther(d.amount)} MON</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        <button
-          onClick={handleSend}
-          disabled={!walletAddress || loading || data.length === 0}
-          className="w-full mt-4 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition disabled:bg-gray-400"
-        >
-          {loading ? "Sending..." : "Send Tokens"}
-        </button>
-      </div>
+    <div className="p-6 max-w-2xl mx-auto bg-white shadow-lg rounded-lg">
+      <h1 className="text-2xl font-bold mb-4 text-center">Monad Token Disperser</h1>
+      <p className="text-gray-600 text-center mb-6">Easily distribute MON tokens to multiple recipients.</p>
+      
+      <label className="block font-semibold mb-2">Upload CSV File:</label>
+      <Input type="file" onChange={handleFileUpload} className="mb-4" />
+      
+      <label className="block font-semibold mb-2">Or Enter Data Manually:</label>
+      <Textarea 
+        placeholder="Enter address and amount manually, separated by space or comma (one per line). Example:\n0x123...abc 10\n0x456...def 20"
+        value={manualData} 
+        onChange={handleManualInput} 
+        className="mb-4 h-52 resize-none border-gray-300 border rounded-lg p-2 w-full"
+      />
+      
+      {data.length > 0 && (
+        <div className="p-4 bg-gray-100 rounded-md mb-4">
+          <h2 className="font-semibold mb-2">Parsed Addresses</h2>
+          <ul className="text-sm">
+            {data.map((d, i) => (
+              <li key={i} className="mb-1">{d.address} - {formatEther(d.amount)} MON</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      
+      <Button onClick={handleSend} disabled={loading || data.length === 0} className="w-full py-2 text-lg">
+        {loading ? "Sending..." : "Send Tokens"}
+      </Button>
     </div>
   );
 }
