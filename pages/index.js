@@ -3,7 +3,7 @@ import { BrowserProvider, Contract, parseEther, formatEther } from "ethers";
 import { Button } from "../components/ui/button";
 import { Textarea } from "../components/ui/textarea";
 
-// Logo SVG
+// Logo SVG (already defined in the previous response)
 const Logo = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="174" height="36" viewBox="0 0 174 36" fill="none">
     <path d="M17.921 2C13.3234 2 2 13.3792 2 17.9999C2 22.6206 13.3234 34 17.921 34C22.5186 34 33.8422 22.6204 33.8422 17.9999C33.8422 13.3794 22.5188 2 17.921 2ZM15.44 27.1492C13.5012 26.6183 8.28864 17.455 8.81704 15.5066C9.34544 13.5581 18.4634 8.31979 20.4021 8.8508C22.341 9.38173 27.5535 18.5449 27.0252 20.4934C26.4968 22.4418 17.3787 27.6802 15.44 27.1492Z" fill="#836EF9" />
@@ -22,27 +22,28 @@ const ABI = [
 
 const styles = {
   container: {
-    padding: "20px",
-    maxWidth: "600px",
-    margin: "20px auto",
-    backgroundColor: "#f9f9f9",
-    borderRadius: "8px",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-    fontFamily: 'Inter, sans-serif', // Use Inter font
+    padding: "30px", // Increased padding
+    maxWidth: "650px", // Increased width
+    margin: "30px auto", // Increased margin
+    backgroundColor: "#fff", // Brighter white
+    borderRadius: "12px", // More rounded corners
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.05)", // Softer shadow
+    fontFamily: 'Inter, sans-serif',
+    color: "#333", // Darker text
   },
   logoContainer: {
     textAlign: "center",
-    marginBottom: "20px",
+    marginBottom: "25px", // Increased margin
   },
   heading: {
-    fontSize: "24px",
-    fontWeight: "bold",
-    marginBottom: "15px",
-    color: "#333",
+    fontSize: "28px", // Increased font size
+    fontWeight: "600", // Slightly lighter font weight
+    marginBottom: "20px", // Increased margin
+    color: "#2c3e50", // Darker color
     textAlign: "center",
   },
   walletInfo: {
-    marginBottom: "15px",
+    marginBottom: "20px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
@@ -50,24 +51,24 @@ const styles = {
   button: {
     backgroundColor: "#836EF9", // Monad Purple
     color: "white",
-    padding: "8px 12px",
+    padding: "10px 16px",
     border: "none",
-    borderRadius: "4px",
+    borderRadius: "6px", // More rounded corners
     cursor: "pointer",
-    fontSize: "14px",
+    fontSize: "15px",
     transition: "background-color 0.2s",
     ":hover": {
       backgroundColor: "#6c56e7",
     },
   },
   disconnectButton: {
-    backgroundColor: "#e74c3c", // Darker Red
+    backgroundColor: "#e74c3c",
     color: "white",
-    padding: "8px 12px",
+    padding: "10px 16px",
     border: "none",
-    borderRadius: "4px",
+    borderRadius: "6px",
     cursor: "pointer",
-    fontSize: "14px",
+    fontSize: "15px",
     transition: "background-color 0.2s",
     ":hover": {
       backgroundColor: "#c0392b",
@@ -75,28 +76,29 @@ const styles = {
   },
   label: {
     display: "block",
-    marginBottom: "5px",
-    fontWeight: "bold",
-    color: "#555",
+    marginBottom: "8px",
+    fontWeight: "500", // Slightly lighter font weight
+    color: "#444",
   },
   textarea: {
     width: "100%",
-    padding: "10px",
-    borderRadius: "4px",
-    border: "1px solid #ccc",
-    fontSize: "14px",
-    minHeight: "150px",
-    resize: "vertical", // Allow vertical resizing
+    padding: "12px",
+    borderRadius: "6px",
+    border: "1px solid #ddd", // Lighter border
+    fontSize: "15px",
+    minHeight: "180px", // Adjusted height
+    resize: "vertical",
+    boxSizing: "border-box", // Ensure padding doesn't affect width
   },
   parsedAddresses: {
-    backgroundColor: "#e9ecef",
-    padding: "15px",
-    borderRadius: "4px",
-    marginBottom: "15px",
+    backgroundColor: "#f0f0f0", // Lighter gray
+    padding: "20px",
+    borderRadius: "6px",
+    marginBottom: "20px",
   },
   parsedAddressesTitle: {
-    fontWeight: "bold",
-    marginBottom: "10px",
+    fontWeight: "600",
+    marginBottom: "12px",
     color: "#333",
   },
   parsedAddressList: {
@@ -104,15 +106,16 @@ const styles = {
     padding: 0,
   },
   parsedAddressItem: {
-    padding: "8px 0",
-    borderBottom: "1px solid #ddd",
+    padding: "10px 0",
+    borderBottom: "1px solid #eee", // Lighter border
+    fontSize: "14px",
   },
   sendButton: {
-    backgroundColor: "#3498db", // Slightly Different Blue
+    backgroundColor: "#3498db",
     color: "white",
-    padding: "10px 15px",
+    padding: "12px 18px",
     border: "none",
-    borderRadius: "4px",
+    borderRadius: "6px",
     cursor: "pointer",
     fontSize: "16px",
     width: "100%",
@@ -121,7 +124,33 @@ const styles = {
       backgroundColor: "#2980b9",
     },
   },
+  footer: {
+    marginTop: "30px",
+    paddingTop: "20px",
+    borderTop: "1px solid #eee",
+    textAlign: "center",
+    fontSize: "12px",
+    color: "#777",
+  },
+  twitterLogo: {
+    width: "20px",
+    height: "20px",
+    marginLeft: "5px",
+    verticalAlign: "middle",
+  },
 };
+
+const TwitterLogo = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.664-1.48 2.028-2.54-
+.904.535-1.906.901-2.952 1.111-.847-.88-2.061-1.43-3.379-1.43-2.54 0-4.601 2.06-4.601 4.601 0 .36.041.71.113 1.055-3.825-.192-7.212-2.025-9.479-4.805-.497.842-.781 1.823-.781 2.834 0 1.591.812 2.994 2.043 3.826-.752-.023-1.462-.23-2.09-.636v.058c0 2.213 1.57 4.052 3.646 4.462-.379.103-.783.159-1.198.159-.291 0-.575-.03-.845-.087.574 1.81 2.257 3.122 4.241 3.159-1.557 1.21-3.53 1.948-5.687 1.948-.365 0-.726-.021-1.084-.062 2.062 1.314 4.511 2.081 7.14 2.081 8.569 0 13.255-7.098 13.255-13.254 0-.201-.005-.402-.014-.602.916-.66 1.705-1.478 2.323-2.414z"/>
+    </svg>
+);
+
+const CONTRACT_ADDRESS = "0xf662457b7902f302aed42825878c76f8e82a2bbe";
+const ABI = [
+  "function disperse(address[] recipients, uint256[] amounts) external payable"
+];
 
 export default function DisperseUI() {
   const [walletAddress, setWalletAddress] = useState(null);
@@ -191,6 +220,8 @@ export default function DisperseUI() {
         <Logo />
       </div>
 
+      <h1 style={styles.heading}>Monad Disperser</h1>
+
       {/* ✅ Connect Wallet Button */}
       {!walletAddress ? (
         <button style={styles.button} onClick={connectWallet}>
@@ -212,7 +243,7 @@ export default function DisperseUI() {
           </p>
 
           <Textarea
-            placeholder={`Wallet Address, Amount`}
+              placeholder={`Wallet Address, Amount\nWallet Address Amount\nWallet Address=Amount`}
             value={manualData}
             onChange={handleManualInput}
             style={styles.textarea}
@@ -238,8 +269,15 @@ export default function DisperseUI() {
         onClick={handleSend}
         disabled={!walletAddress || loading || data.length === 0}
       >
-        {loading ? "Sending..." : "Send Tokens"}
+        {loading ? "Send Tokens" : "Sending..."}
       </button>
+    
+       <footer style={styles.footer}>
+          Created with love <3 by rolf
+          <a href="https://twitter.com/0xRolf" target="_blank" rel="noopener noreferrer">
+            <TwitterLogo style={styles.twitterLogo} />
+          </a>
+        </footer>
     </div>
   );
 }
