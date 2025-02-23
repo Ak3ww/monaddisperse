@@ -234,7 +234,7 @@ export default function DisperseUI() {
         <div>
           <label style={styles.label}>Recipients and amounts</label>
           <p style={{ fontSize: "12px", color: "#777", marginBottom: "10px" }}>
-            Enter one address and amount in ETH on each line.
+            Enter one address and amount in MON on each line.
           </p>
 
           <Textarea
