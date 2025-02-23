@@ -12,6 +12,6 @@
   "react-dom": "latest",
   "ethers": "latest",
   "react-toastify": "^9.1.3",
-  "@web3modal/react": "^3.0.1"
+  "@web3modal/react": "latest"
   }
 }
