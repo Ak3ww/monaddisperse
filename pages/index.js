@@ -188,41 +188,50 @@ export default function DisperseUI() {
         setData(parseData(event.target.value));
     };
 
-            const handleSend = async () => {
-        if (!walletAddress || !window.ethereum || data.length === 0) return;
-        setLoading(true);
+             const handleSend = async () => {
+    if (!walletAddress || !window.ethereum || data.length === 0) return;
+    setLoading(true);
 
-        const provider = new BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner();
-        const contract = new Contract(CONTRACT_ADDRESS, ABI, signer);
+    const provider = new BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    const contract = new Contract(CONTRACT_ADDRESS, ABI, signer);
 
-        const addresses = data.map(d => d.address);
-        const amounts = data.map(d => d.amount);
-        const totalAmount = amounts.reduce((acc, amount) => acc + amount, 0n);
+    const addresses = data.map(d => d.address);
+    const amounts = data.map(d => d.amount);
+    const totalAmount = amounts.reduce((acc, amount) => acc + amount, 0n);
 
-        // Start toast notification
-        toast.promise(
-            contract.disperse(addresses, amounts, { value: totalAmount })
-                .then(tx => tx.wait())
-                .then(txReceipt => {
-                    const explorerUrl = `https://testnet.monadexplorer.com/tx/${txReceipt.hash}?tab=Internal+Txns`;
-                    return (
-                        <div>
-                            Transaction successful! View on Monad Explorer:
-                            <a href={explorerUrl} target="_blank" rel="noopener noreferrer">
-                                View on Explorer
-                            </a>
-                        </div>
-                    );
-                }),
-            {
-                pending: 'Sending...',
-                success: (result) => result, // Display the result (success message with link)
-                error: 'Transaction failed.',
-            }
-        ).finally(() => setLoading(false));
-    };
-
+    // Start toast notification
+    toast.promise(
+      contract.disperse(addresses, amounts, { value: totalAmount })
+        .then(tx => tx.wait())
+        .then(txReceipt => {
+          const txHash = txReceipt.hash;
+          const explorerUrl = `https://testnet.monadexplorer.com/tx/${txHash}?tab=Internal+Txns`;
+          return (
+            <div>
+              Transaction successful! View on Monad Explorer:
+              <a href={explorerUrl} target="_blank" rel="noopener noreferrer">
+                {txHash}
+              </a>
+            </div>
+          );
+        }),
+      {
+        pending: 'Sending...',
+        success: {
+          render: ({ data }) => (
+            <div>
+              Transaction successful! View on Monad Explorer:
+              <a href={`https://testnet.monadexplorer.com/tx/${data.hash}?tab=Internal+Txns`} target="_blank" rel="noopener noreferrer">
+                {data.hash}
+              </a>
+            </div>
+          ),
+        },
+        error: 'Transaction failed.',
+      }
+    ).finally(() => setLoading(false));
+  };
     return (
         <div style={styles.container}>
             <div style={styles.logoContainer}>
