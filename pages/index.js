@@ -17,11 +17,6 @@ const Logo = () => (
     </svg>
 );
 
-const CONTRACT_ADDRESS = "0xf662457b7902f302aed42825878c76f8e82a2bbe";
-const ABI = [
-    "function disperse(address[] recipients, uint256[] amounts) external payable"
-];
-
 const styles = {
     container: {
         padding: "30px",
@@ -253,7 +248,7 @@ export default function DisperseUI() {
                 <div>
                     <label style={styles.label}>Recipients and amounts</label>
                     <p style={{ fontSize: "12px", color: "#777", marginBottom: "10px" }}>
-                        Enter one address and amount in ETH on each line.
+                        Enter one address and amount in MON on each line.
                     </p>
 
                     <Textarea
