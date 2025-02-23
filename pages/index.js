@@ -188,7 +188,7 @@ export default function DisperseUI() {
         setData(parseData(event.target.value));
     };
 
-    const handleSend = async () => {
+            const handleSend = async () => {
         if (!walletAddress || !window.ethereum || data.length === 0) return;
         setLoading(true);
 
