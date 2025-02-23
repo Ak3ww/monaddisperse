@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { ethers } from "ethers";
+import { ethers } from "ethers";  // ❌ Incorrect
+
+// ✅ Correct way to import from ethers v6+
+import { BrowserProvider, Contract, parseEther, formatEther } from "ethers";
+
+// ✅ Fix component imports
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
@@ -19,7 +24,7 @@ export default function DisperseUI() {
     const lines = input.split("\n").map(line => line.trim()).filter(line => line);
     return lines.map(line => {
       const parts = line.split(/[ ,]+/);
-      return { address: parts[0], amount: ethers.utils.parseEther(parts[1]) };
+      return { address: parts[0], amount: parseEther(parts[1]) };  // ✅ Use parseEther
     });
   };
 
@@ -44,13 +49,13 @@ export default function DisperseUI() {
     if (!window.ethereum || data.length === 0) return;
     setLoading(true);
     try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
+      const provider = new BrowserProvider(window.ethereum); // ✅ Use BrowserProvider
+      const signer = await provider.getSigner();
+      const contract = new Contract(CONTRACT_ADDRESS, ABI, signer); // ✅ Use Contract
 
       const addresses = data.map(d => d.address);
       const amounts = data.map(d => d.amount);
-      const totalAmount = amounts.reduce((acc, amount) => acc.add(amount), ethers.BigNumber.from(0));
+      const totalAmount = amounts.reduce((acc, amount) => acc + amount, 0n); // ✅ Use bigint
 
       const tx = await contract.disperse(addresses, amounts, { value: totalAmount });
       await tx.wait();
@@ -77,7 +82,7 @@ export default function DisperseUI() {
           <h2 className="font-semibold mb-2">Parsed Addresses</h2>
           <ul className="text-sm">
             {data.map((d, i) => (
-              <li key={i}>{d.address} - {ethers.utils.formatEther(d.amount)} MON</li>
+              <li key={i}>{d.address} - {formatEther(d.amount)} MON</li> // ✅ Use formatEther
             ))}
           </ul>
         </div>
