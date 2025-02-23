@@ -8,7 +8,9 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Web3Button, useWeb3Modal } from "@web3modal/react";
 
-const CONTRACT_ADDRESS = "0xf662457b7902f302aed42825878c76f8e82a2bbe";
+// Access contract address from environment variable
+const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
+
 const ABI = [
   "function disperse(address[] recipients, uint256[] amounts) external payable"
 ];
@@ -19,6 +21,17 @@ export default function DisperseUI() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const { open } = useWeb3Modal();
+
+  // Error handling for missing contract address
+  useEffect(() => {
+    if (!CONTRACT_ADDRESS) {
+      console.error(
+        "CONTRACT_ADDRESS environment variable is not defined.  Set it in Vercel."
+      );
+      toast.error("Contract address not configured. Check your Vercel environment variables.");
+    }
+  }, []);
+
 
   const parseData = (input) => {
     const lines = input.split("\n").map(line => line.trim()).filter(line => line);
@@ -70,7 +83,7 @@ export default function DisperseUI() {
   };
 
   return (
-    <div className="p-6 max-w-3xl mx-auto bg-white shadow-lg rounded-lg">
+    <div className="p-6 max-w-5xl mx-auto bg-white shadow-lg rounded-lg"> {/* Increased max-w for a wider layout */}
       <h1 className="text-3xl font-bold mb-4 text-center">Monad Token Disperser</h1>
       <p className="text-gray-600 text-center mb-6">Easily distribute MON tokens to multiple recipients.</p>
 
@@ -86,7 +99,7 @@ export default function DisperseUI() {
         placeholder="Enter wallet addresses separated by space or comma, followed by the amount. Example:\n0x123...abc 10\n0x456...def 20"
         value={manualData} 
         onChange={handleManualInput} 
-        className="mb-4 h-80 w-full resize-none border-gray-300 border rounded-lg p-4 text-sm"
+        className="mb-4 h-96 w-full resize-none border-gray-300 border rounded-lg p-4 text-sm"  // Increased height (h-96)
       />
       
       {data.length > 0 && (
