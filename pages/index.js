@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { BrowserProvider, Contract, parseEther, formatEther } from "ethers";
 import { Button } from "../components/ui/button";
 import { Textarea } from "../components/ui/textarea";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Logo SVG (already defined in the previous response)
 const Logo = () => (
