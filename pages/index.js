@@ -179,7 +179,23 @@ export default function DisperseUI() {
 
             <footer className={styles.footer}>
                 Created with love ❤️ by rolf
-                <a href="https://twitter.com/0xRolf" target="_blank" rel="noopener noreferrer">🐦</a>
+                <a href="https://twitter.com/0xRolf" target="_blank" rel="noopener noreferrer">import { FaTwitter } from "react-icons/fa"; // Uses react-icons for the real Twitter logo
+
+const Footer = () => {
+  return (
+    <footer className={styles.footer}>
+      <p>
+        Created with love ❤️ by <a href="https://twitter.com/0xRolf" target="_blank" rel="noopener noreferrer">rolf</a>
+        <a href="https://twitter.com/0xRolf" target="_blank" rel="noopener noreferrer">
+          <FaTwitter className={styles.twitterIcon} />
+        </a>
+      </p>
+    </footer>
+  );
+};
+
+export default Footer;
+</a>
             </footer>
         </div>
     );
