@@ -10,6 +10,9 @@ const ABI = [
     "function disperse(address[] recipients, uint256[] amounts) external payable"
 ];
 
+console.log("Styles object:", styles);
+
+
 export default function DisperseUI() {
     const [walletAddress, setWalletAddress] = useState(null);
     const [manualData, setManualData] = useState("");
