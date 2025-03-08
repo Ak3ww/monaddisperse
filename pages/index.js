@@ -121,7 +121,7 @@ export default function DisperseUI() {
         <div className={`${styles.container} ${darkMode ? styles.dark : ""}`}>
             <header className={styles.header}>
                 <MonadLogo />
-                <h2 className={styles.heading}>Monad Disperser</h1>
+                <h2 className={styles.heading}>Monad Disperser</h2>
                 <button className={styles.darkModeButton} onClick={toggleDarkMode}>
                     🌙
                 </button>
