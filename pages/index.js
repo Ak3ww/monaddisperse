@@ -5,15 +5,15 @@ import { Textarea } from "../components/ui/textarea";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// ✅ Simple Dark Mode Icons (Black & White)
+// ✅ Dark Mode Icons
 const SunIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
     <path d="M12 3v2m0 14v2m4.22-15.78l1.42 1.42M4.36 19.64l1.42-1.42M19 12h2m-16 0H3m12.78 4.22l1.42 1.42M6.64 6.64l1.42 1.42"></path>
   </svg>
 );
 
 const MoonIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="black">
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
     <path d="M9.37 5.51c-.18.64-.27 1.31-.27 1.99 0 4.08 3.32 7.4 7.4 7.4.68 0 1.35-.09 1.99-.27C17.45 17.19 14.93 19 12 19c-3.86 0-7-3.14-7-7 0-2.93 1.81-5.45 4.37-6.49M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1"></path>
   </svg>
 );
@@ -86,6 +86,30 @@ export default function DisperseUI() {
         </button>
       ) : (
         <p>Connected: {walletAddress}</p>
+      )}
+
+      {/* ✅ Textarea for Addresses */}
+      {walletAddress && (
+        <div>
+          <label>Recipients and amounts</label>
+          <Textarea
+            placeholder="0x123...abc 1.23\n0x456...def 4.56"
+            value={manualData}
+            onChange={(e) => setManualData(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "12px",
+              borderRadius: "6px",
+              border: "1px solid #ddd",
+              fontSize: "15px",
+              minHeight: "180px",
+              resize: "vertical",
+              boxSizing: "border-box",
+              backgroundColor: darkMode ? "#444" : "#fff",
+              color: darkMode ? "#fff" : "#000",
+            }}
+          />
+        </div>
       )}
 
       {/* ✅ Footer */}
