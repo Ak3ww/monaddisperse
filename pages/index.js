@@ -102,7 +102,7 @@ export default function DisperseUI() {
     return (
         <div style={styles.container}>
             <div style={styles.logoContainer}>
-                <Logo />
+                <Logo/>
             </div>
 
             <h1 style={styles.heading}>Monad Disperser</h1>
