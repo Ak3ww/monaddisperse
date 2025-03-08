@@ -30,7 +30,6 @@ export default function DisperseUI() {
     // Handle dark mode toggle
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);
-        document.body.classList.toggle(styles.darkMode); // Ensure dark mode applies correctly
     };
 
     // Wallet Connection
@@ -102,8 +101,12 @@ export default function DisperseUI() {
     return (
         <div className={`${styles.container} ${darkMode ? styles.dark : ""}`}>
             <header className={styles.header}>
-                <MonadLogo />
-                <h2 className={styles.heading}>Monad Disperser</h2> {/* Moved to new line */}
+                <div className={styles.logoContainer}>
+                    <MonadLogo />
+                </div>
+                <div className={styles.titleContainer}>
+                    <h2 className={styles.heading}>Monad Disperser</h2>
+                </div>
                 <button className={styles.darkModeButton} onClick={toggleDarkMode}>
                     {darkMode ? "☀️" : "🌙"}
                 </button>
@@ -170,7 +173,7 @@ export default function DisperseUI() {
                 Created with love ❤️ by rolf
                 <a href="https://twitter.com/0xRolf" target="_blank" rel="noopener noreferrer">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill="currentColor" d="M23.643 4.937a10.07 10.07 0 0 1-2.828.775 4.94 4.94 0 0 0 2.165-2.724 9.865 9.865 0 0 1-3.127 1.184 4.916 4.916 0 0 0-8.38 4.482A13.956 13.956 0 0 1 1.67 3.15a4.902 4.902 0 0 0 1.523 6.573 4.902 4.902 0 0 1-2.229-.616v.06a4.918 4.918 0 0 0 3.946 4.827 4.996 4.996 0 0 1-2.224.084 4.926 4.926 0 0 0 4.6 3.42A9.867 9.867 0 0 1 0 19.54a13.94 13.94 0 0 0 7.548 2.212c9.142 0 14.307-7.721 14.307-14.426 0-.22-.005-.44-.014-.658a10.243 10.243 0 0 0 2.502-2.594z"/>
+                        <path fill="currentColor" d="M23.643 4.937a10.07 10.07 0 0 1-2.828.775 4.94 4.94 0 0 0 2.165-2.724 9.865 9.865 0 0 1-3.127 1.184 4.916 4.916 0 0 0-8.38 4.482A13.956 13.956 0 0 1 1.67 3.15a4.902 4.902 0 0 0 1.523 6.573z"/>
                     </svg>
                 </a>
             </footer>
