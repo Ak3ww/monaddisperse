@@ -189,7 +189,17 @@ export default function DisperseUI() {
             <footer className={styles.footer}>
                 Created with love ❤️ by rolf
                 <a href="https://twitter.com/0xRolf" target="_blank" rel="noopener noreferrer">
-                    <TwitterLogo className={styles.twitterLogo} />
+                    <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="20"
+    height="20"
+    fill="currentColor"
+    style={styles.twitterLogo}
+>
+    <path d="M23.643 4.937a10.015 10.015 0 01-2.825.775 4.948 4.948 0 002.165-2.723 9.72 9.72 0 01-3.127 1.184 4.92 4.92 0 00-8.384 4.482A13.978 13.978 0 011.64 3.16a4.902 4.902 0 001.523 6.573 4.903 4.903 0 01-2.229-.616v.061a4.924 4.924 0 003.946 4.827 4.902 4.902 0 01-2.224.084 4.927 4.927 0 004.6 3.417 9.868 9.868 0 01-6.102 2.104c-.396 0-.779-.023-1.161-.067a13.933 13.933 0 007.548 2.213c9.056 0 14.01-7.497 14.01-13.986 0-.213-.006-.425-.016-.637a9.935 9.935 0 002.457-2.548z" />
+</svg>
+
                 </a>
             </footer>
         </div>
