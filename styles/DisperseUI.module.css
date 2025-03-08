@@ -32,3 +32,33 @@
     font-size: 14px;
     color: gray;
 }
+
+
+/* Dark mode toggle */
+.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+/* Header container */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+}
+
+.dark-mode .header {
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+}
+
+/* Dark mode toggle button */
+.darkModeToggle {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 24px;
+}
