@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const SunIcon = () => <span style={{ fontSize: "20px" }}>☀️</span>;
 const MoonIcon = () => <span style={{ fontSize: "20px" }}>🌙</span>;
 
-// ✅ Keep Original Monad Logo
+// ✅ Logo SVG
 const Logo = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="174" height="36" viewBox="0 0 174 36" fill="none">
     <path d="M17.921 2C13.3234 2 2 13.3792 2 17.9999C2 22.6206 13.3234 34 17.921 34C22.5186 34 33.8422 22.6204 33.8422 17.9999C33.8422 13.3794 22.5188 2 17.921 2Z" fill="#836EF9" />
@@ -89,29 +89,25 @@ export default function DisperseUI() {
     };
 
     return (
-        <div style={{ padding: "30px", maxWidth: "650px", margin: "30px auto", borderRadius: "12px", textAlign: "center", backgroundColor: darkMode ? "#333" : "#fff", color: darkMode ? "#fff" : "#000" }}>
-            
-            {/* ✅ Header with Monad Logo & Dark Mode Button */}
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+        <div style={{ padding: "30px", maxWidth: "650px", margin: "30px auto", borderRadius: "12px", textAlign: "center" }}>
+            {/* ✅ Header (Logo + Dark Mode Button) */}
+            <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
                 <Logo />
                 <button
                     onClick={() => setDarkMode(!darkMode)}
                     style={{
-                        backgroundColor: darkMode ? "#ffdd57" : "#222",
-                        color: darkMode ? "#222" : "#fff",
+                        backgroundColor: "transparent",
                         border: "none",
-                        borderRadius: "50%",
-                        width: "40px",
-                        height: "40px",
                         cursor: "pointer",
-                        fontSize: "18px"
+                        fontSize: "20px",
+                        padding: "5px",
                     }}
                 >
                     {darkMode ? <SunIcon /> : <MoonIcon />}
                 </button>
-            </div>
+            </header>
 
-            <h1 style={{ fontSize: "28px", fontWeight: "600", marginBottom: "20px" }}>Monad Disperser</h1>
+            <h1 style={{ fontSize: "28px", fontWeight: "600", marginBottom: "20px", color: darkMode ? "#fff" : "#2c3e50" }}>Monad Disperser</h1>
 
             {/* ✅ Connect Wallet Button */}
             {!walletAddress ? (
