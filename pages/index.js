@@ -5,7 +5,7 @@ import { Textarea } from "../components/ui/textarea";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "../styles/DisperseUI.module.css";
-import '../styles/globals.css';
+import '../styles/global.css';
 
 
 // Smart contract details
