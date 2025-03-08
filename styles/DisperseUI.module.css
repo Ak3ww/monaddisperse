@@ -73,3 +73,35 @@
     color: #777;
     text-align: center;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: var(--background);
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.darkModeToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--text); /* Matches text color */
+}
+
+.twitterIcon {
+  color: #1DA1F2; /* Official Twitter blue */
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+}
