@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from "../styles/DisperseUI.module.css"; // ✅ Added missing styles import
 
+
 const CONTRACT_ADDRESS = "0xf662457b7902f302aed42825878c76f8e82a2bbe";
 const ABI = [
     "function disperse(address[] recipients, uint256[] amounts) external payable"
