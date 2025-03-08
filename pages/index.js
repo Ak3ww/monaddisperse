@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BrowserProvider, Contract, parseEther, formatEther } from "ethers";
 import { Button } from "../components/ui/button";
 import { Textarea } from "../components/ui/textarea";
 import { toast } from "react-toastify";
+import { FaTwitter } from "react-icons/fa"; // Uses react-icons for the real Twitter logo
 import "react-toastify/dist/ReactToastify.css";
 import styles from "../styles/DisperseUI.module.css";
 
@@ -16,6 +17,7 @@ const ABI = [
 const MonadLogo = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="174" height="36" viewBox="0 0 174 36" fill="none">
         <path d="M17.921 2C13.3234 2 2 13.3792 2 17.9999C2 22.6206 13.3234 34 17.921 34C22.5186 34 33.8422 22.6204 33.8422 17.9999C33.8422 13.3794 22.5188 2 17.921 2ZM15.44 27.1492C13.5012 26.6183 8.28864 17.455 8.81704 15.5066C9.34544 13.5581 18.4634 8.31979 20.4021 8.8508C22.341 9.38173 27.5535 18.5449 27.0252 20.4934C26.4968 22.4418 17.3787 27.6802 15.44 27.1492Z" fill="#836EF9" />
+        <text x="40" y="25" fontFamily="Inter" fontSize="24" fill="black">MONAD</text>
     </svg>
 );
 
@@ -177,23 +179,14 @@ export default function DisperseUI() {
                 </>
             )}
 
- import { FaTwitter } from "react-icons/fa"; // Uses react-icons for the real Twitter logo
-
-const Footer = () => {
-  return (
-    <footer className={styles.footer}>
-      <p>
-        Created with love ❤️ by <a href="https://twitter.com/0xRolf" target="_blank" rel="noopener noreferrer">rolf</a>
-        <a href="https://twitter.com/0xRolf" target="_blank" rel="noopener noreferrer">
-          <FaTwitter className={styles.twitterIcon} />
-        </a>
-      </p>
-    </footer>
-  );
-};
-
-export default Footer;
-
+            <footer className={styles.footer}>
+                <p>
+                    Created with love ❤️ by <a href="https://twitter.com/0xRolf" target="_blank" rel="noopener noreferrer">rolf</a>
+                    <a href="https://twitter.com/0xRolf" target="_blank" rel="noopener noreferrer">
+                        <FaTwitter className={styles.twitterIcon} />
+                    </a>
+                </p>
+            </footer>
         </div>
     );
 }
