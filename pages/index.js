@@ -5,41 +5,29 @@ import { Textarea } from "../components/ui/textarea";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// ✅ Header Component (Monad Logo + Dark Mode Toggle)
-const Header = ({ darkMode, toggleDarkMode }) => (
-  <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 20px" }}>
-    <a id="logo" href="https://monad.xyz" style={{ height: "28px", display: "flex", alignItems: "center" }}>
-      <svg xmlns="http://www.w3.org/2000/svg" width="174" height="28" viewBox="0 0 174 36" fill="none">
-        <path d="M17.921 2C13.3234 2 2 13.3792 2 17.9999C2 22.6206 13.3234 34 17.921 34C22.5186 34 33.8422 22.6204 33.8422 17.9999C33.8422 13.3794 22.5188 2 17.921 2Z" fill="#836EF9"></path>
-      </svg>
-    </a>
-
-    {/* ✅ Dark Mode Toggle Button */}
-    <button
-      id="dark-mode-toggle"
-      onClick={toggleDarkMode}
-      style={{
-        background: "none",
-        border: "none",
-        cursor: "pointer",
-        padding: "5px",
-        width: "30px",
-        height: "30px",
-      }}
-    >
-      {darkMode ? (
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
-          <path d="M9.37 5.51c-.18.64-.27 1.31-.27 1.99 0 4.08 3.32 7.4 7.4 7.4.68 0 1.35-.09 1.99-.27C17.45 17.19 14.93 19 12 19c-3.86 0-7-3.14-7-7 0-2.93 1.81-5.45 4.37-6.49M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1"></path>
-        </svg>
-      ) : (
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="black">
-          <path d="M12 3v2m0 14v2m4.22-15.78l1.42 1.42M4.36 19.64l1.42-1.42M19 12h2m-16 0H3m12.78 4.22l1.42 1.42M6.64 6.64l1.42 1.42"></path>
-        </svg>
-      )}
-    </button>
-  </header>
+// ✅ Simple Dark Mode Icons (Black & White)
+const SunIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+    <path d="M12 3v2m0 14v2m4.22-15.78l1.42 1.42M4.36 19.64l1.42-1.42M19 12h2m-16 0H3m12.78 4.22l1.42 1.42M6.64 6.64l1.42 1.42"></path>
+  </svg>
 );
 
+const MoonIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="black">
+    <path d="M9.37 5.51c-.18.64-.27 1.31-.27 1.99 0 4.08 3.32 7.4 7.4 7.4.68 0 1.35-.09 1.99-.27C17.45 17.19 14.93 19 12 19c-3.86 0-7-3.14-7-7 0-2.93 1.81-5.45 4.37-6.49M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1"></path>
+  </svg>
+);
+
+// ✅ Monad Logo in Header
+const Logo = () => (
+  <a href="https://monad.xyz">
+    <svg xmlns="http://www.w3.org/2000/svg" width="174" height="36" viewBox="0 0 174 36" fill="none">
+      <path d="M17.921 2C13.3234 2 2 13.3792 2 17.9999C2 22.6206 13.3234 34 17.921 34C22.5186 34 33.8422 22.6204 33.8422 17.9999C33.8422 13.3794 22.5188 2 17.921 2Z" fill="#836EF9" />
+    </svg>
+  </a>
+);
+
+// ✅ Smart Contract Details
 const CONTRACT_ADDRESS = "0xf662457b7902f302aed42825878c76f8e82a2bbe";
 const ABI = ["function disperse(address[] recipients, uint256[] amounts) external payable"];
 
@@ -79,8 +67,13 @@ export default function DisperseUI() {
 
   return (
     <div style={{ padding: "30px", maxWidth: "650px", margin: "30px auto", borderRadius: "12px", textAlign: "center" }}>
-      {/* ✅ Add Header */}
-      <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      {/* ✅ Header with Logo and Dark Mode Toggle */}
+      <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
+        <Logo />
+        <button onClick={toggleDarkMode} style={{ background: "none", border: "none", cursor: "pointer", padding: "5px" }}>
+          {darkMode ? <SunIcon /> : <MoonIcon />}
+        </button>
+      </header>
 
       <h1 style={{ fontSize: "28px", fontWeight: "600", marginBottom: "20px", color: darkMode ? "#fff" : "#2c3e50" }}>
         Monad Disperser
